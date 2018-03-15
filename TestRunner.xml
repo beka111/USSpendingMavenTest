@@ -1,4 +1,7 @@
 <suite name="USSpending test run">
-<tests>
-<classes>
-<class name="src/test/java/US"></class></classes></tests></suite>
+	<tests>
+		<classes>
+			<class name="src/test/java/USspending"></class>
+		</classes>
+	</tests>
+</suite>
