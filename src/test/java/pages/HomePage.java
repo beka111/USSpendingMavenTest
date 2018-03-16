@@ -16,32 +16,41 @@ public class HomePage {
 
 	// checking the title
 	public boolean isAt() {
-		return driver.getTitle().equals("USAspending.gov");
+		boolean res = driver.getTitle().equals("USAspending.gov");
+		System.out.println("The title is same: " + res);
+		return res;
 	}
-	
-	//============= All the WebElements in HomePage ================
-	
-	
-	@FindBy(xpath="//span[.='Spending Explorer']")
+
+	public boolean checkUrl(String expected) {
+		boolean res = driver.getCurrentUrl().equals(expected);
+		return res;
+	}
+
+	// ============= All the WebElements in HomePage ================
+
+	@FindBy(xpath = "//span[.='Spending Explorer']")
 	public WebElement sependingExplorer;
-	
-	@FindBy(xpath="(//div[@class='nav-dropdown'])[1]")
+
+	@FindBy(xpath = "(//div[@class='nav-dropdown'])[1]")
 	public WebElement awardSearch;
-	
-	@FindBy(xpath="//div[.='Profiles']")
+
+	@FindBy(xpath = "//div[.='Profiles']")
 	public WebElement profiles;
 	
-	@FindBy(xpath="//div[.='Download Center']")
+	//@FindBy(xpath =)
+//	public WebElement agencies;
+
+	@FindBy(xpath = "//div[.='Download Center']")
 	public WebElement downloadCenter;
 
-	@FindBy(xpath="(//div[.='Glossary'])[2]")
+	@FindBy(xpath = "(//div[.='Glossary'])[2]")
 	public WebElement glossary;
-	
-	@FindBy(xpath="//button[@class='hero-button__button']")
+
+	@FindBy(xpath = "//button[@class='hero-button__button']")
 	public WebElement arrowPointingDown;
-	
-	//=========== Click methods ====================
-	
+
+	// =========== Click methods ====================
+
 	public void clickSpendingExplorer() {
 		sependingExplorer.click();
 	}
