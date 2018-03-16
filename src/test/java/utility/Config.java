@@ -8,7 +8,7 @@ public class Config {
 	
 	private static Properties properties;
 	static {
-		String filePath = "src/test/resources/test.properties";
+		String filePath = "./src/test/resources/test.properties";
 
 		try {
 			FileInputStream input = new FileInputStream(filePath);
