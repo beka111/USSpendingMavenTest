@@ -17,7 +17,7 @@ public class Driver {
 	private static WebDriver driver;
 
 	public static WebDriver getDriver(String driverType) {
-
+		if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
 			switch (driverType) {
 			case "chrome":
 				WebDriverManager.chromedriver().setup();
@@ -47,6 +47,7 @@ public class Driver {
 				driver.manage().window().maximize();
 				break;
 			}
+		}
 			return driver;
 		}
 }

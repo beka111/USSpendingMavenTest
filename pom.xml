@@ -18,7 +18,7 @@
 			<artifactId>selenium-java</artifactId>
 			<version>3.10.0</version>
 		</dependency>
-			<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 		<!-- This is to set up automatically webdriver manager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
