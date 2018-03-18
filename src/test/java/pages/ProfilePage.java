@@ -89,7 +89,7 @@ public class ProfilePage {
 	public void agenciesDropDownClick() {
 		action = new Actions(driver);
 		action.moveToElement(profiles).perform();
-		agenciesDropDown.click();
+		action.moveToElement(agenciesDropDown).click().perform();
 	}
 
 	@FindBy(xpath = "//a[.='Federal Accounts']")
