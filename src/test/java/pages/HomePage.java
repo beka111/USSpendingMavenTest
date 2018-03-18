@@ -1,5 +1,6 @@
 package pages;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,7 @@ public class HomePage {
 
 	public boolean checkUrl(String expected) {
 		boolean res = driver.getCurrentUrl().equals(expected);
+		System.out.println("The URL is: "+driver.getCurrentUrl()+ " is verified");
 		return res;
 	}
 
@@ -37,8 +39,8 @@ public class HomePage {
 	@FindBy(xpath = "//div[.='Profiles']")
 	public WebElement profiles;
 	
-	//@FindBy(xpath =)
-//	public WebElement agencies;
+	@FindBy(xpath ="(//a[.='Agencies'])[1]")
+	public WebElement agencies;
 
 	@FindBy(xpath = "//div[.='Download Center']")
 	public WebElement downloadCenter;
