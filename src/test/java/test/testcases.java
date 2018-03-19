@@ -1,5 +1,6 @@
 package test;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -100,7 +101,15 @@ public class testcases {
 		homePage.isAt();
 
 		// Step 3
-		agencyPage.BudgetaryResButtonDessen.click();
+		Thread.sleep(2000);
+		String actual=agencyPage.BudgetaryResButton.getCssValue("color");
+		System.out.println("The actual color is: "+actual);
+		agencyPage.BudgetaryResButton.click();
+		String expected=agencyPage.BudgetaryResButtonDessen.getCssValue("color");
+		System.out.println("The changed color is: "+expected);
+		Assert.assertEquals(actual, expected);
+		
+		
 		Assert.assertTrue(agencyPage.BudgetaryResButtonDessen.isEnabled(), "Thec colo is not changed");
 		Assert.assertTrue(agencyPage.BudgetaryResButtonAssen.isEnabled(), "The color is changed");
 
@@ -133,9 +142,21 @@ public class testcases {
 		homePage.isAt();
 
 		// Step 3
-		agencyPage.PercentOfTotalButton.click();
+		String actual = driver
+				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+				.getText();
+		System.out.println(actual);
+
 		Thread.sleep(2000);
+		agencyPage.PercentOfTotalButton.click();
+		System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
 		Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
+		String expected = driver
+				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+				.getText();
+		System.out.println(expected);
+
+		Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
 
 	}
 
