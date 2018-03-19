@@ -31,5 +31,31 @@ public class AgencyPage {
 	@FindBy(xpath= "//div[@class='results-table-message']")
 	public WebElement noResult;
 	
+	@FindBy(xpath="//div[.='Agency Name']")
+	public WebElement AgencyNameButton;
+	
+	@FindBy(xpath="(//button[@value='asc'])[1]")
+	public WebElement AgencyNameButtonAssen;
+	
+	@FindBy(xpath="(//button[@value='desc'])[1]")
+	public WebElement AgencyNameButtonDessen;
+	
+	@FindBy(xpath="//div[.='Budgetary Resources']")
+	public WebElement BudgetaryResButton;
+	
+	@FindBy(xpath="(//button[@value='asc'])[2]")
+	public WebElement BudgetaryResButtonAssen;
+	
+	@FindBy(xpath="(//button[@value='desc'])[2]")
+	public WebElement BudgetaryResButtonDessen;
+	
+	@FindBy(xpath="//div[.='Percent of Total']")
+	public WebElement PercentOfTotalButton;
+	
+	@FindBy(xpath="(//button[@value='asc'])[3]")
+	public WebElement PercentOfTotalButtonAssen;
+	
+	@FindBy(xpath="(//button[@value='desc'])[3]")
+	public WebElement PercentOfTotalButtonDessen;
 	
 }
