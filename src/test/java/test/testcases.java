@@ -21,6 +21,7 @@ public class testcases {
 	@BeforeClass
 	public void setup() {
 		driver = Driver.getDriver("chrome");
+		driver.manage().window().fullscreen();
 
 	}
 
@@ -107,7 +108,7 @@ public class testcases {
 		agencyPage.BudgetaryResButton.click();
 		String expected=agencyPage.BudgetaryResButtonDessen.getCssValue("color");
 		System.out.println("The changed color is: "+expected);
-		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(actual, expected); // it fails because 
 		
 		
 		Assert.assertTrue(agencyPage.BudgetaryResButtonDessen.isEnabled(), "Thec colo is not changed");
@@ -159,5 +160,44 @@ public class testcases {
 		Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
 
 	}
+	
+	@Test(priority = 5)
+	public void USAHM005() throws InterruptedException {
+		homePage = new HomePage(driver);
+		agencyPage = new AgencyPage(driver);
 
+		// Step 1
+		String exp = Config.getPropValue("url");
+		driver.get(Config.getPropValue("url"));
+		Thread.sleep(2000);
+		homePage.checkUrl(exp);
+		homePage.isAt();
+
+		// Step 2
+		Actions action = new Actions(driver);
+		action.moveToElement(homePage.profiles).perform();
+		homePage.agencies.click();
+		homePage.checkUrl(Config.getPropValue("urlAgency"));
+		homePage.isAt();
+		
+		// Step 3 
+		
+		String actual = driver
+				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+				.getText();
+		System.out.println(actual);
+
+		Thread.sleep(2000);
+	
+		agencyPage.AgencyNameButton.click();
+		System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
+		Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
+		String expected = driver
+				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+				.getText();
+		System.out.println(expected);
+
+		Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
+	
+	}
 }
