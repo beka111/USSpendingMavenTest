@@ -41,6 +41,9 @@ public class HomePage {
 	
 	@FindBy(xpath ="(//a[.='Agencies'])[1]")
 	public WebElement agencies;
+	
+	@FindBy(linkText = "Federal Accounts")
+	public WebElement federalAccounts;
 
 	@FindBy(xpath = "//div[.='Download Center']")
 	public WebElement downloadCenter;

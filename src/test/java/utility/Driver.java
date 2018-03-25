@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -37,6 +38,14 @@ public class Driver {
 				WebDriverManager.iedriver().setup();
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
+
+				break;
+				
+			case "opera":
+				WebDriverManager.operadriver().setup();
+				driver = new OperaDriver();
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().fullscreen();
 
 				break;
 

@@ -59,7 +59,7 @@ public class ProfilePage {
 	Actions action;
 
 	@FindBy(linkText = "Advanced Search")
-	WebElement advancedSearch;
+	public WebElement advancedSearch;
 
 	public void advancedSearchClick() {
 		action = new Actions(driver);
@@ -68,7 +68,7 @@ public class ProfilePage {
 	}
 
 	@FindBy(linkText = "Keyword Search")
-	WebElement keywordSearch;
+	public WebElement keywordSearch;
 
 	public void keywordSerachClick() {
 		action = new Actions(driver);
@@ -110,7 +110,7 @@ public class ProfilePage {
 	WebElement downloadCenter;
 
 	@FindBy(linkText = "Award Data Archive")
-	WebElement awardDataArchive;
+	public WebElement awardDataArchive;
 
 	public void awardDataArchiveClick() {
 		action.moveToElement(downloadCenter).perform();
@@ -118,15 +118,15 @@ public class ProfilePage {
 	}
 
 	@FindBy(xpath = "//div[.='Custom Award Data']")
-	WebElement customAwardData;
+	public WebElement customAwardData;
 
 	public void customawardData() {
 		action.moveToElement(downloadCenter).perform();
 		customAwardData.click();
 	}
 
-	@FindBy(xpath = "//div[.='Agency Submission Files']")
-	WebElement agencySubmissionFiles;
+	@FindBy(xpath = "//li[@class='nav-children__list-item']//a[@href='http://usaspending-submissions.s3-website-us-gov-west-1.amazonaws.com/']")
+	public WebElement agencySubmissionFiles;
 
 	public void agencySubmissionFiles() {
 		action.moveToElement(downloadCenter).perform();
@@ -134,7 +134,7 @@ public class ProfilePage {
 	}
 
 	@FindBy(xpath = "//div[.='Database Snapshots']")
-	WebElement databaseSnapshots;
+	public WebElement databaseSnapshots;
 
 	public void databaseSnapshotsClick() {
 		action.moveToElement(downloadCenter).perform();
@@ -142,7 +142,7 @@ public class ProfilePage {
 	}
 
 	@FindBy(xpath = "//div[.='API']")
-	WebElement api;
+	public WebElement api;
 
 	public void apiClick() {
 		action.moveToElement(downloadCenter).perform();
