@@ -3,6 +3,7 @@ package pages;
 
 import java.util.List;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -58,4 +59,7 @@ public class AgencyPage {
 	@FindBy(xpath="(//button[@value='desc'])[3]")
 	public WebElement PercentOfTotalButtonDessen;
 	
+	public void searchDepartment(String department) {
+		searchBox.sendKeys(department + Keys.ENTER);
+	}
 }

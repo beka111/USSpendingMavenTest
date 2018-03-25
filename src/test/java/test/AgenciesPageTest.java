@@ -7,13 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import pages.AgenciesPage;
+import pages.AgencyPage;
 import pages.ProfilePage;
 import utility.Driver;
 
 public class AgenciesPageTest {
 	WebDriver driver;
-	AgenciesPage ap;
+	AgencyPage ap;
 	ProfilePage pp;
 	
 	
@@ -34,7 +34,7 @@ public class AgenciesPageTest {
 	
 	@Test
 	public void test2() throws InterruptedException {
-		ap = new AgenciesPage(driver);
+		ap = new AgencyPage(driver);
 		ap.searchDepartment(getPropValue("department"));
 		Thread.sleep(2000);
 		
