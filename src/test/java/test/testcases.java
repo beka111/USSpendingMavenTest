@@ -12,192 +12,194 @@ import pages.HomePage;
 import utility.Config;
 import utility.Driver;
 
+import static test.AgenciesPageTest.waitFor;
+
 public class testcases {
 
-	WebDriver driver;
-	HomePage homePage;
-	AgencyPage agencyPage;
+    private WebDriver driver;
+    private HomePage homePage;
+    private AgencyPage agencyPage;
 
-	@BeforeClass
-	public void setup() {
-		driver = Driver.getDriver("chrome");
-		driver.manage().window().fullscreen();
+    @BeforeClass
+    public void setup() {
+        driver = Driver.getDriver("chrome");
+        driver.manage().window().fullscreen();
 
-	}
+    }
 
-	// First Positive Test Case
-	@Test(priority = 1)
-	public void USAHM001() throws InterruptedException {
-		homePage = new HomePage(driver);
-		agencyPage = new AgencyPage(driver);
+    // First Positive Test Case
+    @Test(priority = 1)
+    public void USAHM001() {
+        homePage = new HomePage(driver);
+        agencyPage = new AgencyPage(driver);
 
-		// Step 1
-		String exp = Config.getPropValue("url");
-		driver.get(Config.getPropValue("url"));
-		homePage.checkUrl(exp);
-		Thread.sleep(2000);
-		homePage.isAt();
+        // Step 1
+        String exp = Config.getPropValue("url");
+        driver.get(Config.getPropValue("url"));
+        homePage.checkUrl(exp);
+        waitFor(2);
+        homePage.isAt();
 
-		// Step 2
-		Actions action = new Actions(driver);
-		action.moveToElement(homePage.profiles).perform();
-		homePage.agencies.click();
-		homePage.checkUrl(Config.getPropValue("urlAgency"));
-		Thread.sleep(2000);
-		homePage.isAt();
+        // Step 2
+        Actions action = new Actions(driver);
+        action.moveToElement(homePage.profiles).perform();
+        homePage.agencies.click();
+        homePage.checkUrl(Config.getPropValue("urlAgency"));
+        waitFor(2);
+        homePage.isAt();
 
-		// Step 3
-		agencyPage.searchBox.click();
-		Thread.sleep(2000);
-		agencyPage.searchBox.sendKeys("Department of Homeland Security");
-		Assert.assertTrue(agencyPage.numberOfResult.isDisplayed());
+        // Step 3
+        agencyPage.searchBox.click();
+        waitFor(2);
+        agencyPage.searchBox.sendKeys("Department of Homeland Security");
+        Assert.assertTrue(agencyPage.numberOfResult.isDisplayed());
 
-	}
+    }
 
-	// First Negative Test Case
-	@Test(priority = 2)
-	public void USAHM002() throws InterruptedException {
-		homePage = new HomePage(driver);
-		agencyPage = new AgencyPage(driver);
+    // First Negative Test Case
+    @Test(priority = 2)
+    public void USAHM002() {
+        homePage = new HomePage(driver);
+        agencyPage = new AgencyPage(driver);
 
-		// Step 1
-		String exp = Config.getPropValue("url");
-		driver.get(Config.getPropValue("url"));
-		homePage.checkUrl(exp);
-		homePage.isAt();
+        // Step 1
+        String exp = Config.getPropValue("url");
+        driver.get(Config.getPropValue("url"));
+        homePage.checkUrl(exp);
+        homePage.isAt();
 
-		// Step 2
-		Actions action = new Actions(driver);
-		Thread.sleep(2000);
-		action.moveToElement(homePage.profiles).perform();
-		homePage.agencies.click();
-		homePage.checkUrl(Config.getPropValue("urlAgency"));
-		homePage.isAt();
+        // Step 2
+        Actions action = new Actions(driver);
+        waitFor(2);
+        action.moveToElement(homePage.profiles).perform();
+        homePage.agencies.click();
+        homePage.checkUrl(Config.getPropValue("urlAgency"));
+        homePage.isAt();
 
-		// Step 3
-		agencyPage.searchBox.click();
-		agencyPage.searchBox.sendKeys("babakuly");
-		Assert.assertTrue(agencyPage.numberOfResult.isDisplayed());
-		Assert.assertTrue(agencyPage.noResult.isDisplayed());
+        // Step 3
+        agencyPage.searchBox.click();
+        agencyPage.searchBox.sendKeys("babakuly");
+        Assert.assertTrue(agencyPage.numberOfResult.isDisplayed());
+        Assert.assertTrue(agencyPage.noResult.isDisplayed());
 
-	}
+    }
 
-	@Test(priority = 3)
-	public void USAHM003() throws InterruptedException {
-		homePage = new HomePage(driver);
-		agencyPage = new AgencyPage(driver);
+    @Test(priority = 3)
+    public void USAHM003() {
+        homePage = new HomePage(driver);
+        agencyPage = new AgencyPage(driver);
 
-		// Step 1
-		String exp = Config.getPropValue("url");
-		driver.get(Config.getPropValue("url"));
-		Thread.sleep(2000);
-		homePage.checkUrl(exp);
-		homePage.isAt();
+        // Step 1
+        String exp = Config.getPropValue("url");
+        driver.get(Config.getPropValue("url"));
+        waitFor(2);
+        homePage.checkUrl(exp);
+        homePage.isAt();
 
-		// Step 2
-		Actions action = new Actions(driver);
-		action.moveToElement(homePage.profiles).perform();
-		homePage.agencies.click();
-		homePage.checkUrl(Config.getPropValue("urlAgency"));
-		homePage.isAt();
+        // Step 2
+        Actions action = new Actions(driver);
+        action.moveToElement(homePage.profiles).perform();
+        homePage.agencies.click();
+        homePage.checkUrl(Config.getPropValue("urlAgency"));
+        homePage.isAt();
 
-		// Step 3
-		Thread.sleep(2000);
-		String actual=agencyPage.BudgetaryResButton.getCssValue("color");
-		System.out.println("The actual color is: "+actual);
-		agencyPage.BudgetaryResButton.click();
-		String expected=agencyPage.BudgetaryResButtonDessen.getCssValue("color");
-		System.out.println("The changed color is: "+expected);
-		Assert.assertEquals(actual, expected); // it fails because 
-		
-		
-		Assert.assertTrue(agencyPage.BudgetaryResButtonDessen.isEnabled(), "Thec colo is not changed");
-		Assert.assertTrue(agencyPage.BudgetaryResButtonAssen.isEnabled(), "The color is changed");
+        // Step 3
+        waitFor(2);
+        String actual = agencyPage.BudgetaryResButton.getCssValue("color");
+        System.out.println("The actual color is: " + actual);
+        agencyPage.BudgetaryResButton.click();
+        String expected = agencyPage.BudgetaryResButtonDessen.getCssValue("color");
+        System.out.println("The changed color is: " + expected);
+        Assert.assertEquals(actual, expected); // it fails because
 
-		// Step 4
-		agencyPage.BudgetaryResButtonAssen.click();
-		agencyPage.BudgetaryResButtonAssen.click();
-		Assert.assertTrue(agencyPage.BudgetaryResButtonAssen.isEnabled(), "The color is not changed");
-		System.out.println(agencyPage.BudgetaryResButtonAssen.isEnabled());
-		System.out.println(agencyPage.BudgetaryResButtonAssen.isSelected());
 
-	}
+        Assert.assertTrue(agencyPage.BudgetaryResButtonDessen.isEnabled(), "Thec colo is not changed");
+        Assert.assertTrue(agencyPage.BudgetaryResButtonAssen.isEnabled(), "The color is changed");
 
-	@Test(priority = 4)
-	public void USAHM004() throws InterruptedException {
-		homePage = new HomePage(driver);
-		agencyPage = new AgencyPage(driver);
+        // Step 4
+        agencyPage.BudgetaryResButtonAssen.click();
+        agencyPage.BudgetaryResButtonAssen.click();
+        Assert.assertTrue(agencyPage.BudgetaryResButtonAssen.isEnabled(), "The color is not changed");
+        System.out.println(agencyPage.BudgetaryResButtonAssen.isEnabled());
+        System.out.println(agencyPage.BudgetaryResButtonAssen.isSelected());
 
-		// Step 1
-		String exp = Config.getPropValue("url");
-		driver.get(Config.getPropValue("url"));
-		Thread.sleep(2000);
-		homePage.checkUrl(exp);
-		homePage.isAt();
+    }
 
-		// Step 2
-		Actions action = new Actions(driver);
-		action.moveToElement(homePage.profiles).perform();
-		homePage.agencies.click();
-		homePage.checkUrl(Config.getPropValue("urlAgency"));
-		homePage.isAt();
+    @Test(priority = 4)
+    public void USAHM004() {
+        homePage = new HomePage(driver);
+        agencyPage = new AgencyPage(driver);
 
-		// Step 3
-		String actual = driver
-				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
-				.getText();
-		System.out.println(actual);
+        // Step 1
+        String exp = Config.getPropValue("url");
+        driver.get(Config.getPropValue("url"));
+        waitFor(2);
+        homePage.checkUrl(exp);
+        homePage.isAt();
 
-		Thread.sleep(2000);
-		agencyPage.PercentOfTotalButton.click();
-		System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
-		Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
-		String expected = driver
-				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
-				.getText();
-		System.out.println(expected);
+        // Step 2
+        Actions action = new Actions(driver);
+        action.moveToElement(homePage.profiles).perform();
+        homePage.agencies.click();
+        homePage.checkUrl(Config.getPropValue("urlAgency"));
+        homePage.isAt();
 
-		Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
+        // Step 3
+        String actual = driver
+                .findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+                .getText();
+        System.out.println(actual);
 
-	}
-	
-	@Test(priority = 5)
-	public void USAHM005() throws InterruptedException {
-		homePage = new HomePage(driver);
-		agencyPage = new AgencyPage(driver);
+        waitFor(2);
+        agencyPage.PercentOfTotalButton.click();
+        System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
+        Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
+        String expected = driver
+                .findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+                .getText();
+        System.out.println(expected);
 
-		// Step 1
-		String exp = Config.getPropValue("url");
-		driver.get(Config.getPropValue("url"));
-		Thread.sleep(2000);
-		homePage.checkUrl(exp);
-		homePage.isAt();
+        Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
 
-		// Step 2
-		Actions action = new Actions(driver);
-		action.moveToElement(homePage.profiles).perform();
-		homePage.agencies.click();
-		homePage.checkUrl(Config.getPropValue("urlAgency"));
-		homePage.isAt();
-		
-		// Step 3 
-		
-		String actual = driver
-				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
-				.getText();
-		System.out.println(actual);
+    }
 
-		Thread.sleep(2000);
-	
-		agencyPage.AgencyNameButton.click();
-		System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
-		Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
-		String expected = driver
-				.findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
-				.getText();
-		System.out.println(expected);
+    @Test(priority = 5)
+    public void USAHM005() {
+        homePage = new HomePage(driver);
+        agencyPage = new AgencyPage(driver);
 
-		Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
-	
-	}
+        // Step 1
+        String exp = Config.getPropValue("url");
+        driver.get(Config.getPropValue("url"));
+        waitFor(2);
+        homePage.checkUrl(exp);
+        homePage.isAt();
+
+        // Step 2
+        Actions action = new Actions(driver);
+        action.moveToElement(homePage.profiles).perform();
+        homePage.agencies.click();
+        homePage.checkUrl(Config.getPropValue("urlAgency"));
+        homePage.isAt();
+
+        // Step 3
+
+        String actual = driver
+                .findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+                .getText();
+        System.out.println(actual);
+
+        waitFor(2);
+
+        agencyPage.AgencyNameButton.click();
+        System.out.println("Target===> " + agencyPage.PercentOfTotalButtonDessen.getCssValue("color"));
+        Assert.assertTrue(agencyPage.PercentOfTotalButtonDessen.isEnabled(), "The color is not changed");
+        String expected = driver
+                .findElement(By.xpath("//div[@class='agency-landing-results-table']/table/tbody/tr[1]/td[1]"))
+                .getText();
+        System.out.println(expected);
+
+        Assert.assertNotEquals(actual, expected, "The table is changed, it's Dessending order now");
+
+    }
 }

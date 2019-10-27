@@ -12,42 +12,48 @@ import pages.ProfilePage;
 import utility.Driver;
 
 public class AgenciesPageTest {
-	WebDriver driver;
-	AgencyPage ap;
-	ProfilePage pp;
-	
-	
-	@BeforeClass
-	public void setup() {
-		driver = Driver.getDriver("chrome");
-		driver.get(getPropValue("url"));
-		
-	}
-	
-	@Test
-	public void test1() throws InterruptedException { 
-		
-		pp = new ProfilePage(driver);
-		pp.agenciesDropDownClick();
-		Thread.sleep(3000);
-	}
-	
-	@Test
-	public void test2() throws InterruptedException {
-		ap = new AgencyPage(driver);
-		ap.searchDepartment(getPropValue("department"));
-		Thread.sleep(2000);
-		
-		
-	}
-	@AfterClass
-	public void tearDown() throws InterruptedException {
-		Thread.sleep(3000);
-		driver.quit();
-	}
-	
-	
-	
-	
+    private WebDriver driver;
+    private AgencyPage ap;
+    private ProfilePage pp;
+
+
+    @BeforeClass
+    public void setup() {
+        driver = Driver.getDriver("chrome");
+        driver.get(getPropValue("url"));
+
+    }
+
+    @Test
+    public void test1() {
+        pp = new ProfilePage(driver);
+        pp.agenciesDropDownClick();
+        waitFor(3);
+    }
+
+    @Test
+    public void test2() {
+        ap = new AgencyPage(driver);
+        ap.searchDepartment(getPropValue("department"));
+        waitFor(2);
+
+
+    }
+
+    @AfterClass
+    public void tearDown() {
+        waitFor(3);
+        driver.quit();
+    }
+
+
+    public static void waitFor(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+
 
 }
